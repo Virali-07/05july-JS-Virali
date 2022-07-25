@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+
+        First Name :
+        <input type="text" name="First_name" id="fname" onblur="checkreq(this,'ferror')" required>
+        <span id="ferror"></span>
+        <br><br>
+        
+        Last name :
+        <input type="text" name="Last_name" id="lname" onblur="checkreq(this,'lerror')" required>
+        <span id="lerror"></span>
+        <br><br>
+
+        Mobile Number :
+        <input type="text" name="number" id="number" onkeypress="return(event.which >= 48 && event.which <= 57)" minlength="10" maxlength="10">
+        <br><br>
+        
+        E-mail :
+        <input type="text" name="Email" id="email" onblur="checkreq(this,'eerror')" onkeyup="checkmail(this,'eptnmatch')" required>
+        <span id="eerror"></span>
+        <span id="eptnmatch"></span>
+        <br><br>
+        
+        Password :
+        <input type="password" name="Password" id="password" onblur="checkreq(this,'perror')" onkeyup="checkpass(this,pwptnmatch)" required>
+        <span onclick="showpwd(this)">show Password</span>
+        <span id="perror"></span>
+        <span id="pwptnmatch"></span>
+        <br><br>
+
+        Confirm Password :
+        <input type="password" name="confirm_pwd" id="confirmpwd" onblur="checkreq(this,'cerror')" onkeyup="checkpass(this,cptnmatch)" required>
+        <span onclick="showpwd(this)">show Password</span>
+        <span id="cerror"></span>
+        <span id="cptnmatch"></span>
+        <br><br>
+
+        <input type="submit" value="submit">
+
+
+    </form>
+
+    <script>
+
+        function checkmail(e,spnid)
+        {
+            var pattern = /^([a-zA-z0-9_\.\-])+\@([(a-zA-Z)]+\.)+([a-zA-Z{2,4}])+$/;
+            console.log(pattern.test(e.value));
+
+            if (pattern.test(e.value)) {
+                document.getElementById(spnid).innerText = "valid!";
+            } else {
+                document.getElementById(spnid).innerText = "Enter valid E-mail!!";
+            }
+        }
+
+        function checkpass(e,spnid)
+        {
+            var pattern = /^[(a-zA-z0-9)]+$/;
+            console.log(pattern.test(e.value));
+        }
+
+        function showpwd(e)
+        {
+            // let pws = document.getElementById('password')
+            // console.log(pws.getAttribute('type'));
+            console.log(e.previousElementSibling.getAttribute('type'));
+
+            if (e.previousElementSibling.getAttribute('type') == 'password') 
+            {
+                // console.log("inside if");
+
+                e.previousElementSibling.setAttribute('type','text');
+
+            } else {
+
+                e.previousElementSibling.setAttribute('type','password');
+                // console.log("inside else");
+            }
+        }
+
+
+
+        function checkreq(e,spnid)
+        {
+            console.log(e);
+
+            var inp = e.value;
+            var spn = document.getElementById(spnid)
+
+            if (inp == 0) {
+                spn.innerText = "This field is mandatory!!";
+            } else {
+                spn.innerText = " ";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
